@@ -143,6 +143,13 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " Run goimports on save
 let g:go_fmt_command = "goimports"
 
+" Show better movements
+if has('python3') && has('timers')
+  Plug 'AlphaMycelium/pathfinder.vim'
+else
+  echoerr 'pathfinder.vim is not supported on this Vim installation'
+endif
+
 call plug#end()
 
 
