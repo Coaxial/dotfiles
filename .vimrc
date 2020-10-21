@@ -149,6 +149,9 @@ let g:go_fmt_command = "goimports"
 " unix commands to vim commands
 Plug 'tpope/vim-eunuch'
 
+" Zeal integration
+Plug 'KabbAmine/zeavim.vim'
+
 call plug#end()
 
 
