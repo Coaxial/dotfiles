@@ -19,20 +19,25 @@ console.warn(${0:${VISUAL:value}})
 endsnippet
 
 snippet afun "arrow function"
-(${1}) => {
-  ${2}
+${1:async }(${2}) => {
+  ${3}
 }
 endsnippet
 
 # TDD snippets
 snippet tdesc "describe block"
 describe(${1:MyClass}, () => {
-	${2:${VISUAL}}
+  ${2:${VISUAL}}
 })
 endsnippet
 
+# TODO: it would be nice to have the done() call be deleted if $3 is deleted.
+# The solution might be here:
+# https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt#L1221 (4.7
+# Transformations)
 snippet tit "it block"
-it(${1:'tests something'}, (${2:done}) => {
-	${3}
+it(${1:'tests something'}, ${2:async }(${3:done}) => {
+  ${4}
+  ${5:done()}
 })
 endsnippet
