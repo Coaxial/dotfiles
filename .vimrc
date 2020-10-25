@@ -42,8 +42,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'leshill/vim-json'
 
 " Autoimport statements for JS
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'kristijanhusak/vim-js-file-import', {'do': 'npm install'}
+Plug 'Galooshi/vim-import-js', {'do': 'npm i -g import-js'}
 
 " Emmet
 Plug 'mattn/emmet-vim'
