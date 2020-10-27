@@ -31,8 +31,6 @@ set wildignore+=*/tmp/*,*/node_modules/*,*/coverage/*
 let g:ctrlp_working_path_mode = 'ra'
 " CtrlP to show hidden files
 let g:ctrlp_show_hidden = 1
-" CtrlP to respect .gitignore
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files']
 
 " Status bar
 Plug 'vim-airline/vim-airline'
