@@ -8,6 +8,7 @@ declare -a dotfiles=(\
   .bash_aliases \
   .bash_prompt \
   .bashrc \
+  .config/nvim \
   .gemrc \
   .ghc \
   .gitconfig \
