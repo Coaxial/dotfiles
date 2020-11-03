@@ -151,6 +151,9 @@ Plug 'tpope/vim-eunuch'
 " Zeal integration
 Plug 'KabbAmine/zeavim.vim'
 
+" Unicode search
+Plug 'chrisbra/unicode.vim'
+
 call plug#end()
 
 
