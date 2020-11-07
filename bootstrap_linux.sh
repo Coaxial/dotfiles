@@ -28,3 +28,9 @@ printf 'Installing RVM + Ruby...\n'
 
 printf 'Installing NVM + node...\n'
 ./lib/scripts/install_nvm.sh
+
+printf 'Enabling backups...\n'
+./lib/scripts/backups.sh
+
+printf 'Running postinstall script...\n'
+./lib/scripts/post_install.sh

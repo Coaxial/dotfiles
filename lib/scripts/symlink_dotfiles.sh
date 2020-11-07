@@ -9,6 +9,7 @@ declare -a dotfiles=(\
   .bash_prompt \
   .bashrc \
   .config/nvim \
+  .config/borgmatic \
   .gemrc \
   .ghc \
   .gitconfig \
