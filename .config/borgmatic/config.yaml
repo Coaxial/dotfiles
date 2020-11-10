@@ -6,6 +6,10 @@ location:
     source_directories:
         - ~/Calibre Library/
         - ~/.config/calibre/
+        - ~/Documents/
+        - ~/Pictures/
+        - ~/Downloads/keep/
+        - ~/Maildir/
 
     # Paths to local or remote repositories (required). Tildes are expanded. Multiple
     # repositories are backed up to in sequence. See ssh_command for SSH options like
