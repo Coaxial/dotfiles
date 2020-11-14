@@ -8,3 +8,4 @@ away.log
 .asciinema/install-id
 .maid/maid.log
 passphrase
+__pycache__/
