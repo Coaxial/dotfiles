@@ -1,0 +1,15 @@
+---
+- hosts: all
+  connection: local
+  become: true
+  tasks:
+    - name: Molecule Hello World!
+      debug:
+        msg: Hello, World!
+    # - name: Generate SSH key
+    #   openssh_keypair:
+    #     path: "{{ ansible_env.HOME }}/.ssh/id_ed25519"
+    #     type: ed25519
+    #     group: coaxial
+    #     owner: coaxial
+    #     state: present
