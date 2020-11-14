@@ -1,0 +1,31 @@
+- name: Update apt cache (Debian)
+  apt:
+    update_cache: true
+    cache_valid_time: 3600
+  when: ansible_os_family == 'Debian'
+
+- name: Install openssh-client
+  apt:
+    name: openssh-client
+    state: present
+  when: ansible_os_family == 'Debian'
+
+- name: Create SSH config dir
+  file:
+    path: "{{ ansible_env.HOME }}/.ssh"
+    state: directory
+    mode: 0600
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
+
+- name: Generate SSH key
+  openssh_keypair:
+    path: "{{ ansible_env.HOME }}/.ssh/id_ed25519"
+    type: ed25519
+    mode: 0600
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
+    state: present
+  notify: 
+    - Read SSH key
+    - Display SSH key

@@ -1,0 +1,8 @@
+- name: Read SSH key
+  slurp:
+    src: "{{ ansible_env.HOME }}/.ssh/id_ed25519.pub"
+  register: ssh_pubkey
+
+- name: Display SSH key
+  debug:
+    msg: "The new public SSH key is: `{{ ssh_pubkey['content'] | b64decode }}`"

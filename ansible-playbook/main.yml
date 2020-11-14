@@ -1,0 +1,9 @@
+---
+- hosts: all
+  connection: local
+  become: true
+  tasks:
+    - include_tasks: tasks/ssh_key.yml
+
+  handlers:
+    - include: handlers/ssh.yml
