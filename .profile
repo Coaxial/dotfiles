@@ -22,9 +22,13 @@ export PATH="$PATH:$HOME/.rvm/bin"
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US"
 
-# Set the default editor to be vim
+# Set the default editor to be nvim if present, vim otherwise
 # shellcheck disable=SC2155
-export EDITOR="$(command -v vim)"
+if hash nvim 2>/dev/null; then
+  export EDITOR="$(command -v nvim)"
+else
+  export EDITOR="$(command -v vim)"
+fi
 
 # Load RVM into a shell session *as a function*
 # shellcheck disable=SC1090
