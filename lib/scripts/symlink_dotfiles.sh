@@ -10,6 +10,7 @@ declare -a dotfiles=(\
   .bashrc \
   .config/nvim \
   .config/borgmatic \
+  .config/kitty \
   .gemrc \
   .ghc \
   .gitconfig \
