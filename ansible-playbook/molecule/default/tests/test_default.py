@@ -1,6 +1,5 @@
-import re
-
 """Role testing files using testinfra."""
+import re
 
 
 def test_ssh_keypair(host):
