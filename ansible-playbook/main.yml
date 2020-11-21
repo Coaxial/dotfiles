@@ -3,7 +3,9 @@
   connection: local
   become: true
   tasks:
+    - include_tasks: tasks/set_env.yml
     - include_tasks: tasks/ssh_key.yml
+    - include_tasks: tasks/git.yml
 
   handlers:
     - include: handlers/ssh.yml

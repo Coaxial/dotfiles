@@ -9,3 +9,5 @@ away.log
 .maid/maid.log
 passphrase
 __pycache__/
+secrets
+.vault_password

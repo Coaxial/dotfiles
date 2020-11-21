@@ -5,10 +5,7 @@
   become: true
 
   tasks:
-    - name: Update apt cache (Debian)
-      apt:
-        update_cache: true
-        cache_valid_time: 3600
-      when: ansible_os_family == 'Debian'
+    - name: Set the df__env to be 'test'
+      set_fact: df__env="test"
 
 - import_playbook: ../../main.yml
