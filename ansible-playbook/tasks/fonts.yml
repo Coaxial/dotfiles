@@ -1,0 +1,50 @@
+- name: Set fonts destination directory (Debian)
+  set_fact:
+    df__fonts_dir: "{{ ansible_env.HOME }}/.fonts"
+
+- name: Install unarchive module dependencies
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - unzip
+    - tar
+
+- name: Create fonts destination directories
+  file:
+    path: "{{ df__fonts_dir }}/{{ item }}"
+    state: directory
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
+  with_items:
+    - Anonymous Pro
+    - Terminus
+    - JuliaMono
+    - icons-in-terminal
+
+- name: Install additional fonts (from archives)
+  unarchive:
+    src: "{{ item.url }}"
+    dest: "{{ df__fonts_dir }}/{{ item.name }}"
+    remote_src: true
+  with_items:
+    # TODO: Uncomment this when the original archive doesn't contain the
+    # corrupted file anymore. Uncomment matching test too.
+    # - name: Anonymous Pro
+    #   url: https://www.marksimonson.com/assets/content/fonts/AnonymousPro-1.002.zip
+    - name: Terminus
+      url: https://files.ax86.net/terminus-ttf/files/latest.zip
+    - name: JuliaMono
+      url: https://github.com/cormullion/juliamono/releases/download/v0.027/JuliaMono.tar.gz
+
+# There is no easy way to extract only a specific file from a zip archive with
+# the unarchive module, so we can't download a zip of the repo and only extract
+# the build/icons-in-terminal.ttf file in the task above. Instead, we have to
+# fetch the raw file directly and place it into the fonts directory.
+- name: Install additional fonts (from files)
+  get_url:
+    url: "{{ item.url }}"
+    dest: "{{ df__fonts_dir }}/{{ item.name }}"
+  with_items:
+    - name: icons-in-terminal
+      url: https://github.com/sebastiencs/icons-in-terminal/raw/master/build/icons-in-terminal.ttf

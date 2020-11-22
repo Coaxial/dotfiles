@@ -25,3 +25,8 @@
       package:
         name: git
         state: absent
+
+    - name: Install fontconfig package (for tests)
+      package:
+        name: fontconfig
+        state: present

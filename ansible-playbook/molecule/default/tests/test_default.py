@@ -34,3 +34,15 @@ def test_dotfiles_repo_config(host):
     pattern = re.compile("^git@.+:[-\w]+/[-\w]+\.git$")
 
     assert pattern.match(repo_url.stdout)
+
+def test_extra_fonts(host):
+    extra_fonts = [
+        # TODO: Uncomment when archive is fixed
+        # host.run("fc-list | grep 'Anonymous Pro'").stdout,
+        host.run("fc-list | grep 'JuliaMono'").stdout,
+        host.run("fc-list | grep 'Terminus'").stdout,
+        host.run("fc-list | grep 'icons-in-terminal'").stdout,
+    ]
+
+    for font in extra_fonts:
+        assert len(font) > 0
