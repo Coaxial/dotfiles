@@ -28,10 +28,8 @@
     dest: "{{ df__fonts_dir }}/{{ item.name }}"
     remote_src: true
   with_items:
-    # TODO: Uncomment this when the original archive doesn't contain the
-    # corrupted file anymore. Uncomment matching test too.
-    # - name: Anonymous Pro
-    #   url: https://www.marksimonson.com/assets/content/fonts/AnonymousPro-1.002.zip
+    - name: Anonymous Pro
+      url: https://www.marksimonson.com/assets/content/fonts/AnonymousPro-1_002.zip
     - name: Terminus
       url: https://files.ax86.net/terminus-ttf/files/latest.zip
     - name: JuliaMono

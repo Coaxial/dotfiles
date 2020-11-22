@@ -37,8 +37,7 @@ def test_dotfiles_repo_config(host):
 
 def test_extra_fonts(host):
     extra_fonts = [
-        # TODO: Uncomment when archive is fixed
-        # host.run("fc-list | grep 'Anonymous Pro'").stdout,
+        host.run("fc-list | grep 'Anonymous Pro'").stdout,
         host.run("fc-list | grep 'JuliaMono'").stdout,
         host.run("fc-list | grep 'Terminus'").stdout,
         host.run("fc-list | grep 'icons-in-terminal'").stdout,
