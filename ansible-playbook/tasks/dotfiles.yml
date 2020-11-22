@@ -1,0 +1,33 @@
+---
+- name: Create config dir
+  file:
+    state: directory
+    path: "{{ ansible_env.HOME }}/config"
+
+- name: Symlink config files
+  file:
+    state: link
+    src: "{{ df__repo_location }}/ansible-playbook/files/home/{{ item }}"
+    # src: "files/{{ item }}"
+    dest: "{{ ansible_env.HOME }}/{{ item }}"
+  with_items:
+    - .ansible.cfg
+    - .asciinema/
+    - .bash_aliases
+    - .bash_prompt
+    - .bashrc
+    - .config/nvim
+    - .config/borgmatic
+    - .config/kitty
+    - .gemrc
+    - .ghc
+    - .gitconfig
+    - .gitignore_global
+    - .gvimrc
+    - .irssi
+    - .maid/
+    - .path
+    - .profile
+    - .tmux.conf
+    - .tmux/
+    - .vimrc 

@@ -11,15 +11,41 @@
         cache_valid_time: 3600
       when: ansible_os_family == 'Debian'
 
+      # This whole thing is necessary because I don't understand how to copy a
+      # file or a dir with the Dockerfile molecule uses, and because the
+      # Ansible copy module doesn't work well with recursive directory copies a
+      # more than a few files.
+    - name: Compress repo
+      archive:
+        path: ../../../
+        dest: /tmp/dotfiles.gz
+        force_archive: true
+      delegate_to: localhost
+
+    - name: Copy repo
+      copy:
+        src: /tmp/dotfiles.gz
+        dest: /tmp/dotfiles.gz
+
+    - name: Create destination dir
+      file:
+        path: "{{ ansible_env.HOME }}/dotfiles"
+        state: directory
+
+    - name: Decompress repo
+      unarchive:
+        src: /tmp/dotfiles.gz
+        dest: "{{ ansible_env.HOME }}/dotfiles"
+
     - name: Install git
       package:
         name: git
         state: present
 
-    - name: Clone dotfiles repo (HTTPS)
-      git:
-        repo: https://github.com/coaxial/dotfiles.git
-        dest: "{{ ansible_env.HOME }}/dotfiles"
+    - name: Set repo origin to use HTTPS
+      command: git remote set-url origin https://github.com/coaxial/dotfiles.git
+      args:
+        chdir: "{{ ansible_env.HOME }}/dotfiles"
 
     - name: Remove git
       package:

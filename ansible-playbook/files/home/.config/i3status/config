@@ -1,0 +1,71 @@
+general {
+        colors = true
+        interval = 1
+        output_format = i3bar
+}
+
+# order += "ipv6"
+order += "disk /"
+# order += "run_watch DHCP"
+# order += "run_watch VPNC"
+# order += "path_exists VPN"
+order += "wireless _first_"
+order += "ethernet enp0s25"
+order += "battery all"
+order += "cpu_temperature 0"
+order += "cpu_usage"
+# order += "load"
+# order += "tztime local"
+# order += "tztime berlin"
+order += "volume master"
+order += "time"
+
+
+wireless _first_ {
+        format_up = "📶%quality '%essid'"
+        format_down = "📶down"
+}
+
+ethernet enp0s25 {
+        format_up = "🖧 %ip (%speed)"
+        format_down = "🖧 down"
+}
+
+disk / {
+        format = "%avail /"
+}
+
+battery all {
+        hide_seconds = true
+        low_threshold = 15
+        threshold_type = "time"
+        format = "%status %percentage (%remaining@%consumption)"
+        format_down = "no batt"
+        status_chr = "⏦"
+        status_bat = "⎓"
+        status_full = "😊"
+        status_unk = "?"
+}
+
+cpu_temperature 0 {
+        format = "🌡 %degrees℃ "
+        max_threshold = 65
+}
+
+cpu_usage {
+        format = "%usage"
+        max_threshold = 90
+        degraded_threshold = 65
+}
+
+volume master {
+        format = "🔊 %volume"
+        format_muted = "🔇 (%volume)"
+        device = "default"
+        mixer = "Master"
+        mixer_idx = 0
+}
+
+time {
+        format = "%Y-%m-%d %H:%M:%S"
+}

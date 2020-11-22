@@ -1,0 +1,65 @@
+[core]
+  excludefiles = ~/.gitignore_global
+  excludesfile = ~/.gitignore_global
+  excludesfiles = ~/.gitignore_global
+  editor = vim
+[difftool "sourcetree"]
+  cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+  path = 
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+[alias]
+  a = add
+  adall = add . --all
+  c = commit
+  cam = commit -am
+  clean-branches = "git branch --merged master | grep -v '^\\*\\|  master' | xargs -n 1 git branch -d"
+  cm = commit -m
+  co = checkout
+  # From https://github.com/git-tips/tips
+  conflicts = diff --name-only --diff-filter=U
+  dp = diff --cached
+  edit = "!vim `git ls-files -m` -p"
+  frp = "!f() { \
+    git fetch --prune &&\
+    git rebase origin/master &&\
+    git push --force-with-lease;\
+  }; f"
+  grep = grep -n
+  inline-diff = diff --word-diff
+  l = log --pretty='%C(auto)%h %<(50,trunc)%s %C(white)%cr,% cN' --first-parent
+  pf = push --force-with-lease # Push Force
+  pur = pull-request
+  prune = fetch --prune
+  pt = push --tags
+  reflog = reflog --pretty='%C(auto)%h %gd: %gs %C(black)%cr'
+  s = status
+  t = tag -a
+  uc = reset --soft HEAD~1 # Undo Commit
+  puo = push -u origin
+  amd = commit --amend
+  fxp = commit --fixup=
+
+[push]
+  default = simple
+[rebase]
+  autosquash = true
+[commit]
+  gpgsign = true
+[user]
+  # Override key ID in gitconfig_local if required
+  signingkey = EE234EE1
+[include]
+  path = ~/.gitconfig_local
+[cola]
+  fontdiff = Hack,13,-1,5,50,0,0,0,0,0
+[color "diff"]
+  old = red strike
+  new = green italic
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f

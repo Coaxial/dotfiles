@@ -1,0 +1,100 @@
+:m + Data.List Data.Map Data.Set
+:m +Data.List Data.Map Data.Set
+:m +Data.List
+numUniques :: (Eq a) => [a] -> Int
+numUniques = length.nub
+nub
+numUniques :: (Eq a) => [a] -> Int
+import Data.List
+rightTriangles 
+let rightTriangles = [ (a,b,c) | c <- [1..10], b <- [1..c], a <- [1..b], a^2 + b^2 == c^2, a+b+c==24]
+rightTriangles 
+let rightTriangles = [ (a,b,c) | c <- [1..10], b <- [1..c], a <- [1..b], a^2 + b^2 == c^2, a+b==24]
+rightTriangles 
+let rightTriangles = [ (a,b,c) | c <- [1..10], b <- [1..c], a <- [1..b], a^2 + b^2 == c^2]
+let rightTriangles = [ (a,b,c) | a <- [1..10], b <- [1..c], c <- [1..b], a^2 + b^2 == c^2]
+rightTriangles 
+let rightTriangles = [ (a,b,c) | a <- [1..10], b <- [1..10], c <- [1..10], a^2 + b^2 == c^2]
+let triangles = [ (a,b,c) | a <- [1..10], b <- [1..10], c <- [1..10]]
+triangles 
+let triangles = [ (a,b,c) | a <- [1..10], b <- [1..10], c <- [1..10], a^2 + b^2 < 24 ]
+[ triangle | triangles, a^2 + b^2 < 24 ]
+triangles
+let triangles = [ (a,b,c) | a <- [1..10], b <- [1..10], c <- [1..10] ]
+zip [1,2,3,4,5] ['a','b','c','d']
+zip [1,2,3,4,5] ['a','b','c','d','e']
+zip [1,2,3,4,5] [5,5,5,5,5]
+fst (8,1)
+[1,'a']
+[[x | x <- xs, even x] | xs <- xxs]
+let xxs = [[1,3,5,2,3,1,2,4,5],[1,2,3,4,5,6,7,8,9]]
+rmNU "HheeeeeELLooooooO"
+rmNU str = [c | c <- str, isUpperCase c]
+isUpperCase c = c `elem` ['A'..'Z']
+rmNU "HeLLo"
+rmNU str = [c | c <- str, upperCaseChar c]
+rmNU str = [c | c <- str, upperCaseChar]
+upperCaseChar c = c `elem` ['A'..'Z']
+rmNU "HeLLo"
+rmNU str = [c | c <- str, c `elem` ['A'..'Z']]
+rmNU "HeLLo"
+rmNU str = [c | c <- str, c < ['A'..'Z']]
+rmNU "HeLLo"
+rmNU str = [c | c <- str, str < ['A'..'Z']]
+rmNU str = [c | c <- str, str < ['A'..'Z']
+sum [1..3]
+length' [1..100]
+length' [1..]
+length' xs = sum [1 | _ <- xs]
+[x*y | x <- [2,5,10], y <- [8,10,11], x*y < 50]
+[x*y | x <- [2,5,10], y <- [8,10,11], x < 50]
+[2,5,10]*[8,10,11]
+[x*y | x <- [2,5,10], y <- [8,10,11]]
+odd 1
+odd [0,1..20]
+[0,1..20]
+boomBangs [0,1..20]
+boomBangs 
+boomBangs xs = [ if x < 10 then "BOOM!" else "BANG!" | x <- xs, odd x]
+[x | x <- [50..100], x `mod` 7 == 3]
+[x | x <- [50..100], x%7 == 3]
+[x*2 | x <- [0,8..64]]
+8^2
+64^2
+[x*2 | x <- [1..10], x*2 >= 12]
+[x*x | x <- [0,8..64]]
+[x^2 | x <- [0,8..64]]
+[x^2 | x <- [1..10]]
+[x*4 | x <- [1..10]]
+[x*2 | x <- [1..10]]
+take 10 [2,4..]
+take 10 [2,4]
+3 `replicate` 10
+take 10 (repeat 5)
+take 10 (cycle "Hi! ")
+take 10 (cycle [1,2,3])
+take 24 [13,26..]
+[0.1,0.2..1]
+[0,8..4096]
+[8,0..4096]
+[2,100..1000]
+[2,100..120]
+[3,1..10]
+[3..10]
+[1,3..10]
+[0.1,0.3..1]
+0.1++0.2
+.1++.2
+[20,19..1]
+[20..1]
+[2,4..20]
+['a'..'z']
+[0..1024]
+[0..33]
+1...20
+1..20
+elem 4 [3,4,5]
+4 `elem` [3,4,5]
+sum [1,2,3,4]
+product [1,2,3,4]
+product [1,2,3]
