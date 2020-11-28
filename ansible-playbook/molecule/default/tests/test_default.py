@@ -31,7 +31,7 @@ def test_git_local_config(host):
 
 def test_dotfiles_repo_config(host):
     repo_url = host.run("cd /root/dotfiles && git config --get remote.origin.url")
-    pattern = re.compile("^git@.+:[-\w]+/[-\w]+\.git$")
+    pattern = re.compile(r'^git@.+:[-\w]+/[-\w]+\.git$')
 
     assert pattern.match(repo_url.stdout)
 
@@ -73,3 +73,13 @@ def test_dotfiles(host):
     for filename in filenames:
         dotfile = host.file("/root/" + filename)
         assert dotfile.linked_to == "/root/dotfiles/ansible-playbook/files/home/" + filename
+
+def test_neovim(host):
+    neovim = host.package('neovim')
+
+    assert neovim.is_installed
+
+def test_neovim_plugins(host):
+    plugins_dir = host.file('/root/.vim/autoload')
+
+    assert plugins_dir.exists

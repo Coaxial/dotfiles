@@ -8,6 +8,7 @@
     - include_tasks: tasks/git.yml
     - include_tasks: tasks/fonts.yml
     - include_tasks: tasks/dotfiles.yml
+    - include_tasks: tasks/nvim.yml
 
   handlers:
     - include: handlers/ssh.yml

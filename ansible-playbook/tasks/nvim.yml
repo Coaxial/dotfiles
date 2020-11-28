@@ -1,0 +1,21 @@
+---
+- name: Install neovim
+  package:
+    name: neovim
+    state: present
+
+- name: Install neovim plugins' dependencies
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - build-essential
+    - cmake
+    - python3-dev
+      # curl is for auto-installing vim-plug at first launch
+    - curl
+
+- name: Install neovim plugins
+  shell:
+    cmd: if [ ! -d ~/.vim/autoload ]; then nvim +PlugInstall +qall; fi
+    creates: "{{ ansible_env.HOME }}/.vim/autoload"
