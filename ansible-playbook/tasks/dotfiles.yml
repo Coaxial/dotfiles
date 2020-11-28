@@ -2,17 +2,25 @@
 - name: Create config dir
   file:
     state: directory
-    path: "{{ ansible_env.HOME }}/config"
+    path: "{{ ansible_env.HOME }}/.config"
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
+
+- name: Backup existing .bashrc and .profile
+  shell: 'if [ ! -L "$HOME/{{ item }}" ]; then mv "$HOME/{{ item }}" "$HOME/{{ item }}.bak"; fi'
+  with_items:
+    - .bashrc
+    - .profile
+  changed_when: false
 
 - name: Symlink config files
   file:
     state: link
     src: "{{ df__repo_location }}/ansible-playbook/files/home/{{ item }}"
-    # src: "files/{{ item }}"
     dest: "{{ ansible_env.HOME }}/{{ item }}"
   with_items:
     - .ansible.cfg
-    - .asciinema/
+    - .asciinema
     - .bash_aliases
     - .bash_prompt
     - .bashrc
@@ -25,9 +33,9 @@
     - .gitignore_global
     - .gvimrc
     - .irssi
-    - .maid/
+    - .maid
     - .path
     - .profile
     - .tmux.conf
-    - .tmux/
+    - .tmux
     - .vimrc 

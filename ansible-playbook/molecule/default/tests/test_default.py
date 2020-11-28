@@ -49,7 +49,7 @@ def test_extra_fonts(host):
 def test_dotfiles(host):
     filenames = [
         ".ansible.cfg",
-        ".asciinema/",
+        ".asciinema",
         ".bash_aliases",
         ".bash_prompt",
         ".bashrc",
@@ -62,14 +62,14 @@ def test_dotfiles(host):
         ".gitignore_global",
         ".gvimrc",
         ".irssi",
-        ".maid/",
+        ".maid",
         ".path",
         ".profile",
         ".tmux.conf",
-        ".tmux/",
-        ".vimrc ",
+        ".tmux",
+        ".vimrc",
     ]
 
     for filename in filenames:
-        dotfile = host.file(filename)
-        assert dotfile.linked_to == "/root/dotfiles/ansible-playbook/files/" + filename
+        dotfile = host.file("/root/" + filename)
+        assert dotfile.linked_to == "/root/dotfiles/ansible-playbook/files/home/" + filename
