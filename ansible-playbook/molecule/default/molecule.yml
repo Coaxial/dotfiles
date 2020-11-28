@@ -1,6 +1,8 @@
 ---
 dependency:
   name: galaxy
+  options:
+    role-file: requirements.yml
 driver:
   name: docker
 platforms:
@@ -11,3 +13,7 @@ provisioner:
   name: ansible
 verifier:
   name: testinfra
+lint: |
+  set -e
+  yamllint .
+  ansible-lint .

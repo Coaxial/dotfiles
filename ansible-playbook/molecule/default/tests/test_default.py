@@ -83,3 +83,13 @@ def test_neovim_plugins(host):
     plugins_dir = host.file('/root/.vim/autoload')
 
     assert plugins_dir.exists
+
+def test_rvm_install(host):
+    rvm_version = host.run("bash -l -c 'rvm --version'").stdout
+    ruby_version = host.run("bash -l -c 'ruby --version'").stdout
+    rvm_version_pattern = re.compile(r'^rvm \d+\.\d+\.\d+ \(latest\)')
+    ruby_version_pattern = re.compile(r'^ruby \d+\.\d+\.\d+p\d+')
+
+
+    assert rvm_version_pattern.match(rvm_version)
+    assert ruby_version_pattern.match(ruby_version)
