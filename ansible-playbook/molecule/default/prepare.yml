@@ -56,3 +56,10 @@
       package:
         name: fontconfig
         state: present
+
+    - name: Populate .rvmrc for a root install
+      copy:
+        content: |
+          export rvm_prefix="$HOME"
+          export rvm_path="$HOME/.rvm"
+        dest: "{{ ansible_env.HOME }}/.rvmrc"

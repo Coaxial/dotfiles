@@ -93,3 +93,9 @@ def test_rvm_install(host):
 
     assert rvm_version_pattern.match(rvm_version)
     assert ruby_version_pattern.match(ruby_version)
+
+def test_nvm_install(host):
+    nvm_version = host.run("bash -l -c 'nvm --version'").stdout
+    nvm_version_pattern = re.compile(r'^\d+\.\d+\.\d+')
+
+    assert nvm_version_pattern.match(nvm_version)

@@ -9,7 +9,8 @@
     - include_tasks: tasks/fonts.yml
     - include_tasks: tasks/dotfiles.yml
     - include_tasks: tasks/nvim.yml
-    - include_tasks: tasks/ruby.yml
+    - include_tasks: tasks/rvm.yml
+    - include_tasks: tasks/nvm.yml
 
   handlers:
     - include: handlers/ssh.yml
