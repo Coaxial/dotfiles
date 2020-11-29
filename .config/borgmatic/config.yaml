@@ -134,7 +134,7 @@ storage:
 
     # Command to use instead of "ssh". This can be used to specify ssh options.
     # Defaults to not set.
-    # ssh_command: ssh -i /path/to/private/key
+    # ssh_command: ssh -F /home/coaxial/.ssh/config
 
     # Base path used for various Borg directories. Defaults to $HOME, ~$USER, or ~.
     # See https://borgbackup.readthedocs.io/en/stable/usage/general.html#environment-variables for details.

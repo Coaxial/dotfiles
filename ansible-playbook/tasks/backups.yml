@@ -1,0 +1,48 @@
+---
+- name: Install packages for backups
+  become: true
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - borgbackup
+    - borgmatic
+
+- name: Create config directories
+  file:
+    path: "{{ ansible_env.HOME }}/.config/systemd/user"
+    state: directory
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
+    mode: 0700
+
+- name: Configure borgmatic timer and service
+  template:
+    src: "templates/{{ item }}.j2"
+    dest: "{{ ansible_env.HOME }}/.config/systemd/user/{{ item }}"
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
+    mode: 0600
+  with_items:
+    - borgmatic.service
+    - borgmatic.timer
+  when: df__enable_backups
+
+  # TODO: This fails in molecule because sudo -u ansible systemctl --user
+  # fails, but su - ansible     systemctl --user works.
+- name: Enable and start automatic backups
+  systemd:
+    name: borgmatic.timer
+    scope: user
+    enabled: true
+    state: started
+  when: df__enable_backups
+
+- name: Disable and stop automatic backups
+  systemd:
+    name: borgmatic.timer
+    scope: user
+    enabled: false
+    state: sopped
+  when: not df__enable_backups
+

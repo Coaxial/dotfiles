@@ -1,10 +1,12 @@
 ---
 - name: Install neovim
+  become: true
   package:
     name: neovim
     state: present
 
 - name: Install neovim plugins' dependencies
+  become: true
   package:
     name: "{{ item }}"
     state: present

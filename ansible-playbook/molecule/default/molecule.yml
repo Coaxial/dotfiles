@@ -6,11 +6,23 @@ dependency:
 driver:
   name: docker
 platforms:
+  # From https://github.com/geerlingguy/molecule-playbook-testing
   - name: ubuntu2004
     image: geerlingguy/docker-ubuntu2004-ansible:latest
-    pre_build_image: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    command: ""
+    # privileged is necessary for systemd tasks
+    privileged: true
+    pre_build_image: false
 provisioner:
   name: ansible
+  inventory:
+    host_vars:
+      ubuntu2004:
+        ansible_user: ansible
+        ansible_env:
+          USER: ansible
 verifier:
   name: testinfra
 lint: |

@@ -3,6 +3,7 @@
   file:
     state: directory
     path: "{{ ansible_env.HOME }}/.config"
+    mode: 0700
     owner: "{{ ansible_env.USER }}"
     group: "{{ ansible_env.USER }}"
 

@@ -3,6 +3,7 @@
     df__fonts_dir: "{{ ansible_env.HOME }}/.fonts"
 
 - name: Install unarchive module dependencies
+  become: true
   package:
     name: "{{ item }}"
     state: present

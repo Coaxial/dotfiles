@@ -2,12 +2,14 @@
 - name: Prepare
   hosts: all
   connection: local
-  become: true
+  become: false
 
   tasks:
     - name: Update apt cache (Debian)
+      become: true
       apt:
         update_cache: true
+        # Don't use cache_valid_time as it never refreshes the cache
         cache_valid_time: 3600
       when: ansible_os_family == 'Debian'
 
@@ -16,6 +18,7 @@
       # Ansible copy module doesn't work well with recursive directory copies a
       # more than a few files.
     - name: Compress repo
+      become: true
       archive:
         path: ../../../
         dest: /tmp/dotfiles.gz
@@ -23,6 +26,7 @@
       delegate_to: localhost
 
     - name: Copy repo
+      become: true
       copy:
         src: /tmp/dotfiles.gz
         dest: /tmp/dotfiles.gz
@@ -38,6 +42,7 @@
         dest: "{{ ansible_env.HOME }}/dotfiles"
 
     - name: Install git
+      become: true
       package:
         name: git
         state: present
@@ -48,18 +53,20 @@
         chdir: "{{ ansible_env.HOME }}/dotfiles"
 
     - name: Remove git
+      become: true
       package:
         name: git
         state: absent
 
     - name: Install fontconfig package (for tests)
+      become: true
       package:
         name: fontconfig
         state: present
 
-    - name: Populate .rvmrc for a root install
-      copy:
-        content: |
-          export rvm_prefix="$HOME"
-          export rvm_path="$HOME/.rvm"
-        dest: "{{ ansible_env.HOME }}/.rvmrc"
+    # - name: Populate .rvmrc for a root install
+    #   copy:
+    #     content: |
+    #       export rvm_prefix="$HOME"
+    #       export rvm_path="$HOME/.rvm"
+    #     dest: "{{ ansible_env.HOME }}/.rvmrc"

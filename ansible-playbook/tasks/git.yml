@@ -1,4 +1,5 @@
 - name: Install git
+  become: true
   apt:
     name: git
     state: present
@@ -11,7 +12,7 @@
     group: "{{ ansible_env.USER }}"
     mode: '0600'
 
-- name: Set dotfiles repo fast
+- name: Set dotfiles repo path
   set_fact:
     df__repo_local_path: "{{ ansible_env.HOME }}/dotfiles"
 
