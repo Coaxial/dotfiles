@@ -11,7 +11,7 @@
       when: ansible_os_family == 'Debian'
 
     - include_tasks: tasks/set_env.yml
-    - include_tasks: tasks/ssh_key.yml
+    - include_tasks: tasks/ssh.yml
     - include_tasks: tasks/git.yml
     - include_tasks: tasks/fonts.yml
     - include_tasks: tasks/dotfiles.yml

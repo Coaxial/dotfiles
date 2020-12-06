@@ -22,6 +22,14 @@ def test_ssh_keypair(host):
     assert dir.group == "ansible"
     assert dir.mode == 0o700
 
+def test_ssh_config(host):
+    file = host.file('/home/ansible/.ssh/config')
+
+    assert file.exists
+    assert file.user == "ansible"
+    assert file.group == "ansible"
+    assert file.mode == 0o600
+
 def test_git(host):
     git = host.package("git")
 

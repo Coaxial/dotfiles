@@ -19,6 +19,9 @@ platforms:
     pre_build_image: false
 provisioner:
   name: ansible
+  config_options:
+    defaults:
+      vault_password_file: "${MOLECULE_SCENARIO_DIRECTORY}/../../.vault_password"
   inventory:
     host_vars:
       ubuntu2004:

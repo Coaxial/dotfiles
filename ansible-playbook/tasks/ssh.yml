@@ -14,6 +14,14 @@
     owner: "{{ ansible_env.USER }}"
     group: "{{ ansible_env.USER }}"
 
+- name: Copy ssh config file
+  copy:
+    src: files/ssh_config
+    dest: "{{ ansible_env.HOME }}/.ssh/config"
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
+    mode: 0600
+
 - name: Generate SSH key
   openssh_keypair:
     path: "{{ ansible_env.HOME }}/.ssh/id_ed25519"
