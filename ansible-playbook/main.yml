@@ -19,7 +19,8 @@
     - include_tasks: tasks/rvm.yml
     - include_tasks: tasks/nvm.yml
     - include_tasks: tasks/backups.yml
-    # TODO: ssh config and other postinstall
+    # TODO: borgmatic passphrase
+    # install firefox, thunderbird, etc etc
 
   handlers:
     - include: handlers/ssh.yml
