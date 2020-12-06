@@ -7,4 +7,3 @@
           curl -sSL https://get.rvm.io | bash -s -- stable --ruby
       fi
     creates: "{{ ansible_env.HOME }}/.rvm/bin/rvm"
-    

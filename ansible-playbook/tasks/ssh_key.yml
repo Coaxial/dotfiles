@@ -1,3 +1,4 @@
+---
 - name: Install openssh-client
   become: true
   apt:
@@ -22,6 +23,6 @@
     owner: "{{ ansible_env.USER }}"
     group: "{{ ansible_env.USER }}"
     state: present
-  notify: 
+  notify:
     - Read SSH key
     - Display SSH key

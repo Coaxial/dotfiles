@@ -61,4 +61,3 @@
   with_items:
     - borgmatic.timer
   when: not df__enable_backups
-

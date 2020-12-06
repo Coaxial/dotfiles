@@ -4,4 +4,5 @@
     cmd: >
       curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
     creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
-    warn: false # using curl knowingly
+    # using curl knowingly
+    warn: false

@@ -1,3 +1,4 @@
+---
 - name: Set fonts destination directory (Debian)
   set_fact:
     df__fonts_dir: "{{ ansible_env.HOME }}/.fonts"
@@ -17,6 +18,7 @@
     state: directory
     owner: "{{ ansible_env.USER }}"
     group: "{{ ansible_env.USER }}"
+    mode: 0600
   with_items:
     - Anonymous Pro
     - Terminus

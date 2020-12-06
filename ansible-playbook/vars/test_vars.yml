@@ -2,4 +2,3 @@
 df__email: "test@example.org"
 df__repo_location: "{{ ansible_env.HOME }}/dotfiles"
 df__enable_backups: true
-

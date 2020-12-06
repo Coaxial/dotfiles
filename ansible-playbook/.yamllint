@@ -1,6 +1,12 @@
+# vi: ft=yaml
 ---
 # Based on ansible-lint config
 extends: default
+
+ignore: |
+  /tasks/ssh_key.yml
+  /vars/vault.yml
+  files/
 
 rules:
   braces:
@@ -16,18 +22,18 @@ rules:
     max-spaces-after: -1
     level: error
   comments: disable
-  comments-indentation: disable
-  document-start: disable
+  comments-indentation: enable
+  document-start: enable
   empty-lines:
     max: 3
     level: error
   hyphens:
     level: error
-  indentation: disable
+  indentation: enable
   key-duplicates: enable
   line-length: disable
   new-line-at-end-of-file: disable
   new-lines:
     type: unix
-  trailing-spaces: disable
+  trailing-spaces: enable
   truthy: disable

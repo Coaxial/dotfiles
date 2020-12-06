@@ -1,3 +1,4 @@
+---
 - name: Use prod vars
   include_vars: vars.yml
   when: df__env is not defined

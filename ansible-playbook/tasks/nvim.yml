@@ -14,7 +14,7 @@
     - build-essential
     - cmake
     - python3-dev
-      # curl is for auto-installing vim-plug at first launch
+    # curl is for auto-installing vim-plug at first launch
     - curl
 
 - name: Install neovim plugins
