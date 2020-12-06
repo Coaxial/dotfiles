@@ -11,7 +11,9 @@ platforms:
     image: geerlingguy/docker-ubuntu2004-ansible:latest
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    command: ""
+    # command: ${MOLECULE_DOCKER_COMMAND:-"/usr/sbin/init"}
+    # command: ""
+    command: "/usr/lib/systemd/systemd"
     # privileged is necessary for systemd tasks
     privileged: true
     pre_build_image: false

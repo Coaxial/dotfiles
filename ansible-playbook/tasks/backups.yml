@@ -28,21 +28,41 @@
     - borgmatic.timer
   when: df__enable_backups
 
-  # TODO: This fails in molecule because sudo -u ansible systemctl --user
-  # fails, but su - ansible     systemctl --user works.
-- name: Enable and start automatic backups
-  systemd:
-    name: borgmatic.timer
-    scope: user
-    enabled: true
-    state: started
+- name: Create systemd user timers dir
+  file:
+    state: directory
+    path: "{{ ansible_env.HOME }}/.config/systemd/user/timers.target.wants"
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
+    mode: 0700
   when: df__enable_backups
 
-- name: Disable and stop automatic backups
-  systemd:
-    name: borgmatic.timer
-    scope: user
-    enabled: false
-    state: sopped
+- name: Enable automatic backups
+  # Screw the systemd module that can't deal with a user unit
+  file:
+    state: link
+    src: "{{ ansible_env.HOME }}/.config/systemd/user/{{ item }}"
+    dest: "{{ ansible_env.HOME }}/.config/systemd/user/timers.target.wants/{{ item }}"
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
+    # Permissions on a symlink don't mean anything, everyone has to be able
+    # to traverse it.
+  with_items:
+    - borgmatic.timer
+  when: df__enable_backups
+
+  # TODO: Test this
+- name: Disable automatic backups
+  # Screw the systemd module that can't deal with a user unit
+  file:
+    state: absent
+    src: "{{ ansible_env.HOME }}/.config/systemd/user/{{ item }}"
+    dest: "{{ ansible_env.HOME }}/.config/systemd/user/timers.target.wants/{{ item }}"
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
+    # Permissions on a symlink don't mean anything, everyone has to be able
+    # to traverse it.
+  with_items:
+    - borgmatic.timer
   when: not df__enable_backups
 

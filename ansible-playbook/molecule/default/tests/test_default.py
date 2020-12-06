@@ -109,16 +109,14 @@ def test_nvm_install(host):
 def test_backups(host):
     packages = ['borgbackup', 'borgmatic']
     config_files = ['borgmatic.service', 'borgmatic.timer']
-    config_dirs = ['/home/ansible/.config/systemd', '/home/ansible/.config/systemd/user']
-
-    assert host.service('borgmatic').is_enabled
-    assert host.service('borgmatic').is_running
+    config_dirs = ['/home/ansible/.config/systemd', '/home/ansible/.config/systemd/user', '/home/ansible/.config/systemd/user/timers.target.wants']
+    enabled_timer = host.file('/home/ansible/.config/systemd/user/timers.target.wants/borgmatic.timer')
 
     for package in packages:
         assert host.package(package).is_installed
 
     for config_file in config_files:
-        file = host.file(config_file)
+        file = host.file('/home/ansible/.config/systemd/user/' + config_file)
 
         assert file.exists
         assert file.user == 'ansible'
@@ -131,3 +129,9 @@ def test_backups(host):
         assert d.user == 'ansible'
         assert d.group == 'ansible'
         assert d.mode == 0o700
+
+    assert enabled_timer.exists
+    assert enabled_timer.user == 'ansible'
+    assert enabled_timer.group == 'ansible'
+    # Permissions on a symlink don't mean anything, everyone has to be able
+    # to traverse it, so not testing it.
