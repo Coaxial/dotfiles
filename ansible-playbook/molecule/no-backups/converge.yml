@@ -1,0 +1,18 @@
+---
+- name: Converge
+  hosts: all
+  connection: local
+  vars:
+    df__enable_backups: false
+
+  tasks:
+    - name: Set the df__env to be 'test'
+      set_fact: df__env="test"
+
+    # Forcing molecule to run as another user than root clobbers env vars.
+    # Tasks rely on ansible_env.USER and it is undefined in the containers.
+    - name: Set ansible_env.USER
+      set_fact:
+        ansible_env: "{{ ansible_env | combine({ 'USER': ansible_user }) }}"
+
+    - include_tasks: ../../tasks/backups.yml

@@ -7,6 +7,7 @@
   with_items:
     - borgbackup
     - borgmatic
+  when: df__enable_backups
 
 - name: Create config directories
   file:
@@ -15,6 +16,7 @@
     owner: "{{ ansible_env.USER }}"
     group: "{{ ansible_env.USER }}"
     mode: 0700
+  when: df__enable_backups
 
 - name: Configure borgmatic timer and service
   template:
@@ -51,17 +53,11 @@
     - borgmatic.timer
   when: df__enable_backups
 
-  # TODO: Test this
 - name: Disable automatic backups
   # Screw the systemd module that can't deal with a user unit
   file:
     state: absent
-    src: "{{ ansible_env.HOME }}/.config/systemd/user/{{ item }}"
-    dest: "{{ ansible_env.HOME }}/.config/systemd/user/timers.target.wants/{{ item }}"
-    owner: "{{ ansible_env.USER }}"
-    group: "{{ ansible_env.USER }}"
-    # Permissions on a symlink don't mean anything, everyone has to be able
-    # to traverse it.
+    path: "{{ ansible_env.HOME }}/.config/systemd/user/timers.target.wants/{{ item }}"
   with_items:
     - borgmatic.timer
   when: not df__enable_backups

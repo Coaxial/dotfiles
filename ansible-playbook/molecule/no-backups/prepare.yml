@@ -1,0 +1,42 @@
+---
+- name: Prepare
+  hosts: all
+  connection: local
+  become: false
+
+  tasks:
+    - name: Update apt cache (Debian)
+      become: true
+      apt:
+        update_cache: true
+        # Don't use cache_valid_time as it never refreshes the cache
+        cache_valid_time: 3600
+      when: ansible_os_family == 'Debian'
+
+      # This whole thing is necessary because I don't understand how to copy a
+      # file or a dir with the Dockerfile molecule uses, and because the
+      # Ansible copy module doesn't work well with recursive directory copies a
+      # more than a few files.
+    - name: Compress repo
+      become: true
+      archive:
+        path: ../../../
+        dest: /tmp/dotfiles.gz
+        force_archive: true
+      delegate_to: localhost
+
+    - name: Copy repo
+      become: true
+      copy:
+        src: /tmp/dotfiles.gz
+        dest: /tmp/dotfiles.gz
+
+    - name: Create destination dir
+      file:
+        path: "{{ ansible_env.HOME }}/dotfiles"
+        state: directory
+
+    - name: Decompress repo
+      unarchive:
+        src: /tmp/dotfiles.gz
+        dest: "{{ ansible_env.HOME }}/dotfiles"
