@@ -17,48 +17,36 @@
   set_fact:
     df__repo_local_path: "{{ ansible_env.HOME }}/dotfiles"
 
-- name: Record current dotfiles git repo URL (protocol)
-  shell: |
-    set -o pipefail
-    git config --get remote.origin.url | cut -d ':' -f 1
+- name: Record current dotfiles git repo URL (protocol) # noqa 303 git module can't do that
+  shell: git config --get remote.origin.url | cut -d ':' -f 1
   args:
     chdir: "{{ df__repo_local_path }}"
   register: dotfiles_repo_protocol
   changed_when: false
 
-- name: Record current dotfiles git repo URL (hostname)
-  shell: |
-    set -o pipefail
-    git config --get remote.origin.url | cut -d '/' -f 3
+- name: Record current dotfiles git repo URL (hostname) # noqa 303 git module can't do that
+  shell: git config --get remote.origin.url | cut -d '/' -f 3
   args:
     chdir: "{{ df__repo_local_path }}"
   when: dotfiles_repo_protocol.stdout == "https"
   register: dotfiles_repo_hostname
 
-- name: Record current dotfiles git repo URL (git user)
-  shell: |
-    set -o pipefail
-    git config --get remote.origin.url | cut -d '/' -f 4
+- name: Record current dotfiles git repo URL (git user) # noqa 303 git module can't do that
+  shell: git config --get remote.origin.url | cut -d '/' -f 4
   args:
     chdir: "{{ df__repo_local_path }}"
   when: dotfiles_repo_protocol.stdout == "https"
   register: dotfiles_repo_git_user
 
-- name: Record current dotfiles git repo URL (repo name)
-  shell: |
-    set -o pipefail
-    git config --get remote.origin.url | cut -d '/' -f 5
+- name: Record current dotfiles git repo URL (repo name) # noqa 303 git module can't do that
+  shell: git config --get remote.origin.url | cut -d '/' -f 5
   args:
     chdir: "{{ df__repo_local_path }}"
   when: dotfiles_repo_protocol.stdout == "https"
   register: dotfiles_repo_repo_name
 
 - name: Update dotfiles repo URL to use SSH # noqa 303 git module can't do that
-  command: >
-    git remote set-url origin git
-    @{{ dotfiles_repo_hostname.stdout | quote }}
-    :{{ dotfiles_repo_git_user.stdout | quote }}
-    /{{ dotfiles_repo_repo_name.stdout | quote }}
+  command: "git remote set-url origin git@{{ dotfiles_repo_hostname.stdout | quote }}:{{ dotfiles_repo_git_user.stdout | quote }}/{{ dotfiles_repo_repo_name.stdout | quote }}" # noqa 204 multiline in yaml sucks hard
   args:
     chdir: "{{ df__repo_local_path }}"
   when: dotfiles_repo_protocol.stdout == "https"

@@ -1,4 +1,5 @@
 # vi: ft=yaml
 ---
 skip_list:
-  - '106'
+  - '106' # role name doesn't match nomenclature, it's fine
+  - '306' # can't use pipefail with sh

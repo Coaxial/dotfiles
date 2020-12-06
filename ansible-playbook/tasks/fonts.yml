@@ -18,7 +18,7 @@
     state: directory
     owner: "{{ ansible_env.USER }}"
     group: "{{ ansible_env.USER }}"
-    mode: 0600
+    mode: 0700
   with_items:
     - Anonymous Pro
     - Terminus
