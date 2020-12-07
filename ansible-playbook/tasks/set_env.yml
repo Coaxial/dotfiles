@@ -5,4 +5,4 @@
 
 - name: Use test vars
   include_vars: test_vars.yml
-  when: df__env | default(omit) == 'test'"
+  when: df__env is defined and df__env == 'test'"
