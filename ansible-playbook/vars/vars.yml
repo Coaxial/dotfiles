@@ -1,4 +1,5 @@
 ---
+df__env: "prod"
 df__email: "{{ vault_df__email }}"
 df__repo_location: "{{ playbook_dir }}"
 # false to not back this machine up offsite
