@@ -25,7 +25,7 @@ vars/vars.yml: .vault_password
 	@ansible-vault create vars/vars.yml --vault-password-file .vault_password
 
 editvars: vars/vars.yml
-	@ansible-vault edit vars/vars.yml --vault-password-file .vault_password
+	@ansible-vault edit vars/vault.yml --vault-password-file .vault_password
 
 playbook_run: .vault_password install_reqs
 	@ansible-playbook -i inventory main.yml --vault-password-file .vault_password $(verbosity)

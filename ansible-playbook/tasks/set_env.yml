@@ -1,8 +1,8 @@
 ---
 - name: Use prod vars
   include_vars: vars.yml
-  when: df__env is not defined
+  when: df__env == 'prod'
 
 - name: Use test vars
   include_vars: test_vars.yml
-  when: df__env is defined and df__env is 'test'
+  when: df__env == 'test'
