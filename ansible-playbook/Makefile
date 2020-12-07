@@ -29,7 +29,7 @@ editvars: vars/vars.yml
 	@ansible-vault edit vars/vars.yml --vault-password-file .vault_password
 
 playbook_run: .vault_password install_reqs
-	@ansible-playbook --limit $(limit) playbook.yml --vault-password-file .vault_password $(verbosity)
+	@ansible-playbook --limit $(limit) main.yml --vault-password-file .vault_password $(verbosity)
 	@- rm -f playbook.retry
 
 clean:
