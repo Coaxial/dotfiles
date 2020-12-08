@@ -39,5 +39,4 @@
     - .path
     - .profile
     - .tmux.conf
-    - .tmux
     - .vimrc
