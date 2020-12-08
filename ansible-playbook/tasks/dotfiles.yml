@@ -13,6 +13,7 @@
     - .bashrc
     - .profile
   changed_when: false
+  failed_when: false
 
 - name: Symlink config files
   file:
