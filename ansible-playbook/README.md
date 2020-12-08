@@ -6,8 +6,10 @@ Requires the pip modules:
 - ansible
 - pytest-testinfra
 
-Install ansible (apt or pip3).
+1. Install ansible (apt or pip3).
 
-Review variables: `$EDITOR vars/vars.yml` and `make editvars`.
+2. Review variables: `$EDITOR vars/vars.yml` and `make editvars`.
 
-Run playbook: `make playbook_run`
+3. Enable passwordless sudo (assuming the `sudo` group is named `sudo`): `sed -i "/^%sudo/s/ALL\$/NOPASSWD:ALL/g" /etc/sudoers`
+
+4. Run playbook: `make playbook_run`
