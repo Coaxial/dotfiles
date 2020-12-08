@@ -3,6 +3,10 @@
   include_vars: vars.yml
   when: df__env is undefined
 
+- name: Use encrypted prod vars
+  include_vars: vault.yml
+  when: df__env is undefined
+
 - name: Use test vars
   include_vars: test_vars.yml
   when: (df__env is defined) and (df__env == 'test')
