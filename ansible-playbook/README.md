@@ -10,6 +10,6 @@ Requires the pip modules:
 
 2. Review variables: `$EDITOR vars/vars.yml` and `make editvars`.
 
-3. Enable passwordless sudo (assuming the `sudo` group is named `sudo`): `sed -i "/^%sudo/s/ALL\$/NOPASSWD:ALL/g" /etc/sudoers`
+3. Enable passwordless sudo for user: `echo -e "${USER} ALL=(ALL)\tNOPASSWD:ALL" | sudo tee -a /etc/sudoers.d/90-"${USER}"`
 
 4. Run playbook: `make playbook_run`
