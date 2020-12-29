@@ -12,4 +12,6 @@ Requires the pip modules:
 
 3. Enable passwordless sudo for user: `echo -e "${USER} ALL=(ALL)\tNOPASSWD:ALL" | sudo tee -a /etc/sudoers.d/90-"${USER}"`
 
-4. Run playbook: `make playbook_run`
+4. Upgrade the OS
+
+5. Run playbook: `make playbook_run`
