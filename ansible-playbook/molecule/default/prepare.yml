@@ -9,8 +9,7 @@
       become: true
       apt:
         update_cache: true
-        # Don't use cache_valid_time as it never refreshes the cache
-        cache_valid_time: 3600
+        # NOTE: Don't use cache_valid_time as it never refreshes the cache.
       when: ansible_os_family == 'Debian'
 
       # This whole thing is necessary because I don't understand how to copy a
