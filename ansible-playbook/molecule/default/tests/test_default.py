@@ -80,7 +80,6 @@ def test_dotfiles(host):
         ".path",
         ".profile",
         ".tmux.conf",
-        ".tmux",
         ".vimrc",
     ]
 
