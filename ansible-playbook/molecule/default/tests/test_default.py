@@ -118,6 +118,7 @@ def test_backups(host):
     config_files = ['borgmatic.service', 'borgmatic.timer']
     config_dirs = ['/home/ansible/.config/systemd', '/home/ansible/.config/systemd/user', '/home/ansible/.config/systemd/user/timers.target.wants']
     enabled_timer = host.file('/home/ansible/.config/systemd/user/timers.target.wants/borgmatic.timer')
+    passphrase = host.file('/home/ansible/.config/borgmatic/passphrase')
 
     for package in packages:
         assert host.package(package).is_installed
@@ -142,3 +143,9 @@ def test_backups(host):
     assert enabled_timer.group == 'ansible'
     # Permissions on a symlink don't mean anything, everyone has to be able
     # to traverse it, so not testing it.
+
+    assert passphrase.exists
+    assert passphrase.user == 'ansible'
+    assert passphrase.group == 'ansible'
+    assert passphrase.mode == 0o600
+    assert passphrase.contains('Super Secret!')

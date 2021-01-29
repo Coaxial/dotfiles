@@ -61,3 +61,12 @@
   with_items:
     - borgmatic.timer
   when: not df__enable_backups
+
+- name: Set borgmatic passphrase
+  template:
+    src: templates/passphrase.j2
+    dest: "{{ ansible_env.HOME }}/.config/borgmatic/passphrase"
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
+    mode: 0600
+  when: df__enable_backups

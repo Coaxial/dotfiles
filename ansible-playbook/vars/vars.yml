@@ -3,3 +3,4 @@ df__email: "{{ vault_df__email }}"
 df__repo_location: "{{ playbook_dir }}/.."
 # false to not back this machine up offsite
 df__enable_backups: true
+df__borgmatic_passphrase: "{{ vault_df__borgmatic_passphrase }}"
