@@ -1,0 +1,45 @@
+---
+- name: Install signal apt key
+  become: true
+  apt_key:
+    url: https://updates.signal.org/desktop/apt/keys.asc
+    state: present
+
+- name: Add Signal repo
+  become: true
+  apt_repository:
+    repo: deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main
+    state: present
+
+- name: Add Telegram repo
+  become: true
+  apt_repository:
+    repo: ppa:atareao/telegram
+    state: present
+
+- name: Refresh apt cache
+  become: true
+  apt:
+    update_cache: true
+  when: ansible_os_family == 'Debian'
+
+- name: Install additional software
+  become: true
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - firefox
+    - thunderbird
+    - irssi
+    - tmux
+    - zeal
+    - mosh
+    - kitty
+    - copyq
+    - redshift
+    - redshift-gtk
+    - tmuxinator
+    - asciinema
+    - signal-desktop
+    - telegram

@@ -149,3 +149,25 @@ def test_backups(host):
     assert passphrase.group == 'ansible'
     assert passphrase.mode == 0o600
     assert passphrase.contains('Super Secret!')
+
+
+def test_additional_software(host):
+    packages = [
+        'firefox',
+        'thunderbird',
+        'irssi',
+        'tmux',
+        'zeal',
+        'mosh',
+        'kitty',
+        'copyq',
+        'redshift',
+        'redshift-gtk',
+        'tmuxinator',
+        'asciinema',
+        'signal-desktop',
+        'telegram',
+    ]
+
+    for package in packages:
+        assert host.package(package).is_installed
